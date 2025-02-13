@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://byti3lknu2jom"]
+
+[ext_resource type="Texture2D" uid="uid://biikq1ccfyjry" path="res://Assets/Sprites/Clam/dedbc1c3-bc29-42a2-b6b6-db3a2d7589e5_clamanimatedpreview-ezgif.com-gif-to-sprite-converter.png" id="1_86xgj"]
+[ext_resource type="Script" path="res://Script/clam.gd" id="1_vhohr"]
+[ext_resource type="PackedScene" uid="uid://q5a50amjrp0" path="res://EndScreen.tscn" id="2_fcvdu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhuh7"]
+atlas = ExtResource("1_86xgj")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf0dv"]
+atlas = ExtResource("1_86xgj")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xdd74"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhuh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf0dv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ahao"]
+size = Vector2(359, 373)
+
+[node name="clam" type="Area2D"]
+script = ExtResource("1_vhohr")
+end_screen_scene = ExtResource("2_fcvdu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.744141, 0.728516)
+sprite_frames = SubResource("SpriteFrames_xdd74")
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-29, -2)
+shape = SubResource("RectangleShape2D_8ahao")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

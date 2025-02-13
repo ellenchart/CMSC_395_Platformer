@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://q5a50amjrp0"]
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 211.0
+offset_right = 785.0
+offset_bottom = 428.0
+theme_override_font_sizes/font_size = 100
+text = "YOU WIN"
+horizontal_alignment = 1
+vertical_alignment = 1
