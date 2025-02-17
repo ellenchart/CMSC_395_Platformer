@@ -1,0 +1,140 @@
+[gd_scene load_steps=19 format=3 uid="uid://csqv4ygkmlk7g"]
+
+[ext_resource type="Script" path="res://Script/enemy.gd" id="1_pcs4d"]
+[ext_resource type="Texture2D" uid="uid://drn8lavus0kvt" path="res://Assets/Sprites/Crab/Crab_Death.png" id="2_mj5ct"]
+[ext_resource type="Texture2D" uid="uid://dbjey6u10uih" path="res://Assets/Sprites/Crab/Crab_Run.png" id="3_fmhgn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duiyn"]
+atlas = ExtResource("2_mj5ct")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wslqt"]
+atlas = ExtResource("2_mj5ct")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0533"]
+atlas = ExtResource("2_mj5ct")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycoeg"]
+atlas = ExtResource("2_mj5ct")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61ttc"]
+atlas = ExtResource("2_mj5ct")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwpis"]
+atlas = ExtResource("3_fmhgn")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8x30c"]
+atlas = ExtResource("3_fmhgn")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nt5m"]
+atlas = ExtResource("3_fmhgn")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nkeu"]
+atlas = ExtResource("3_fmhgn")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_106we"]
+atlas = ExtResource("3_fmhgn")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfyqd"]
+atlas = ExtResource("3_fmhgn")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_66fw6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_duiyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wslqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0533")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycoeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61ttc")
+}],
+"loop": false,
+"name": &"death",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwpis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8x30c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nt5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nkeu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_106we")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfyqd")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7rma8"]
+size = Vector2(28, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wg7t"]
+size = Vector2(31, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5sih"]
+size = Vector2(36, 12.5)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_pcs4d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_66fw6")
+animation = &"death"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, 21)
+shape = SubResource("RectangleShape2D_7rma8")
+
+[node name="floor_checker" type="RayCast2D" parent="."]
+position = Vector2(0, 18)
+collision_mask = 2
+
+[node name="top_checker" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top_checker"]
+position = Vector2(6.5, 11)
+shape = SubResource("RectangleShape2D_5wg7t")
+
+[node name="sides_checker" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sides_checker"]
+position = Vector2(6, 21)
+shape = SubResource("RectangleShape2D_v5sih")
+
+[connection signal="body_entered" from="top_checker" to="." method="_on_top_checker_body_entered"]
+[connection signal="body_entered" from="sides_checker" to="." method="_on_sides_checker_body_entered"]

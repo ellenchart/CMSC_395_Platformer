@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqk4vov1nrq8n"]
+
+[ext_resource type="Script" path="res://Script/Pearl.gd" id="1_hssrv"]
+[ext_resource type="SpriteFrames" uid="uid://llodjy1cbj14" path="res://Assets/Sprites/Pearl/Pearl_Spriteframes.tres" id="2_1cmct"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b8xb5"]
+height = 32.7379
+
+[node name="Pearl" type="CharacterBody2D"]
+script = ExtResource("1_hssrv")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.44443, 0.5)
+scale = Vector2(1.03472, 1.03125)
+sprite_frames = ExtResource("2_1cmct")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.19209e-07)
+scale = Vector2(-0.668581, -0.549822)
+shape = SubResource("CapsuleShape2D_b8xb5")

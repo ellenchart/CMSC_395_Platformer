@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccpg88mns82tm"]
+
+[ext_resource type="Script" path="res://Script/grass.gd" id="1_jnaru"]
+[ext_resource type="Texture2D" uid="uid://dix01ubrwqjua" path="res://Assets/Sprites/Grass/grass.png" id="1_seyyp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qe6mp"]
+size = Vector2(542, 474)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ixwl"]
+atlas = ExtResource("1_seyyp")
+region = Rect2(0, 0, 50, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xx7y"]
+atlas = ExtResource("1_seyyp")
+region = Rect2(50, 0, 50, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_puees"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ixwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xx7y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="grass" type="Area2D"]
+script = ExtResource("1_jnaru")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-25, -36)
+shape = SubResource("RectangleShape2D_qe6mp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(14.1707, 14.2094)
+sprite_frames = SubResource("SpriteFrames_puees")
+frame_progress = 0.55881
